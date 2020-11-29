@@ -21,7 +21,7 @@ public class Main {
         while (true) {
             humanTurn();
             printMap();
-            if (checkWin(DOT_X)) {
+            if (checkWin(DOT_X, DOTS_TO_WIN)) {
                 System.out.println("Победил человек");
                 break;
             }
@@ -31,7 +31,7 @@ public class Main {
             }
             aiTurn();
             printMap();
-            if (checkWin(DOT_O)) {
+            if (checkWin(DOT_O, DOTS_TO_WIN)) {
                 System.out.println("Победил Искуственный Интеллект");
                 break;
             }
@@ -42,7 +42,30 @@ public class Main {
         }
         System.out.println("Игра закончена");
     }
-    public static boolean checkWin(char symb) {
+//    static boolean checkLn(int cy, int cx, int vy, int vx, char symb, int toWin) {
+//        if (cx + vx * (toWin - 1) > SIZE - 1 || cy + vy * (toWin - 1) > SIZE - 1 || cy + vy * (toWin - 1) < 0) {
+//            return false;
+//        }
+//        for (int i = 0; i < toWin; i++) {
+//            if (map[cy + i * vy][cx + i * vx] !=symb) {
+//                return false;
+//            }
+//        }
+//        return true;
+//
+//    }
+    public static boolean checkWin(char symb, int toWin) {
+//        for (int i = 0; i < SIZE; i++) {
+//            for ( int j = 0; j < SIZE; j++) {
+//                if (checkLn(i, j, 0, 1, symb, toWin) ||
+//                        checkLn(i, j, 1, 0, symb, toWin) ||
+//                        checkLn(i, j, 1, 1, symb, toWin) ||
+//                        checkLn(i, j, -1, 1, symb, toWin)) {
+//                    return true;
+//                }
+//
+//            }
+//        } return  false;
 
         for (int i = 0; i < SIZE; i++) {
             int counter = 0;
@@ -50,6 +73,8 @@ public class Main {
 
                 if (map[i][j] == symb) {
                     counter++;
+
+
                 }
             } if (counter == DOTS_TO_WIN) {
                 return true;
@@ -104,6 +129,7 @@ public class Main {
                 return true;
             }
         }
+        return false;
 //        int diagonalFromRight1 = 0;
 //        for (int i = 0, j = SIZE - 1; i < SIZE; i++, j--) {
 //            for (int k = SIZE - 1; k > 0; k--) {
@@ -115,7 +141,7 @@ public class Main {
 //                return true;
 //            }
 //        }
-        return false;
+
 //        if(map[0][0] == symb && map[0][1] == symb && map[0][2] == symb) return true;
 //        if(map[1][0] == symb && map[1][1] == symb && map[1][2] == symb) return true;
 //        if (map[2][0] == symb && map[2][1] == symb && map[2][2] == symb) return true;
